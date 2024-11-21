@@ -9,6 +9,10 @@ const createUser = async (req, res, responses) => {
 		'device-info': req.headers['device-info'],
 	})
 }
+const reActivateAccount = async (req, res, response) => {
+	const selectedConfig = routeConfigs.routes.find((obj) => obj.sourceRoute === req.sourceRoute)
+	return await requesters.post(req.baseUrl, selectedConfig.targetRoute.path, req.body)
+}
 const updateUser = async (req, res, responses) => {
 	const selectedConfig = routeConfigs.routes.find((obj) => obj.sourceRoute === req.sourceRoute)
 
@@ -124,6 +128,7 @@ const validateEmails = async (req, res , selectedConfig) => {
 
 const userController = {
 	createUser,
+	reActivateAccount,
 	updateUser,
 	entityTypeRead,
 	loginUser,
